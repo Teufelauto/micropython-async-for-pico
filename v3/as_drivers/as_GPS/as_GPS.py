@@ -58,7 +58,7 @@ COURSE = const(RMC | VTG)
 
 class AS_GPS(object):
     # Can omit time consuming checks: CRC 6ms Bad char and line length 9ms
-    FULL_CHECK = True
+    FULL_CHECK = False
     _SENTENCE_LIMIT = 76  # Max sentence length (based on GGA sentence)
     _NO_FIX = 1
 
@@ -490,7 +490,7 @@ class AS_GPS(object):
         result = False
         while not result:
             result = True
-            await asyncio.sleep(1)  # Successfully parsed messages set ._valid bits
+            await asyncio.sleep(0)  # Successfully parsed messages set ._valid bits
             if position and not self._valid & POSITION:
                 result = False
             if date and not self._valid & DATE:
